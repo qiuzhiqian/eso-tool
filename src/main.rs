@@ -31,7 +31,9 @@ fn main() -> std::io::Result<()> {
             f.read_to_string(&mut out).expect("read failed");
             let index = out.find(prefix).expect("find @ failed");
             let s = decode(&mut out[index+prefix.len()..].as_bytes());
-            println!("{}", s);
+            let pretty = format_to_json(&s).expect("to json failed");
+            println!("=============");
+            println!("{}", pretty);
         },
         _ => unreachable!("clap should ensure we don't get here"),
     };
@@ -48,4 +50,9 @@ fn decode<R: std::io::Read>(context: &mut R) -> String {
     let mut s = String::new();
     d.read_to_string(&mut s).unwrap();
     s
+}
+
+fn format_to_json(data: &str) -> serde_json::Result<String> {
+    let value: serde_json::Value = serde_json::from_str(data)?;
+    return serde_json::to_string_pretty(&value);
 }

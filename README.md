@@ -9,3 +9,19 @@
 ```
 
 按照这个规则进行反编码即可得到原始的json码了。
+
+## eso
+eso是一个开源的跨平台阅读类软件，支持支持自定义源。详细信息可以查看官网资料
+- [eso_source](https://github.com/mabDc/eso_source)
+- [eso](https://github.com/mabDc/eso)
+
+## 编译
+```
+cd eso-tool
+cargo build
+```
+
+## 运行
+```
+eso-tool decode --file /xxx/xxx.txt --prefix @
+```
